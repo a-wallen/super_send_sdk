@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Contact _$ContactFromJson(Map<String, dynamic> json) {
-  return _Contact.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Contact {
   String? get contactId => throw _privateConstructorUsedError;
@@ -41,8 +37,8 @@ mixin _$Contact {
   String? get teamId => throw _privateConstructorUsedError;
   @JsonKey(name: 'CampaignId')
   String? get campaignId => throw _privateConstructorUsedError;
+  Map<String, dynamic> get customFields => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ContactCopyWith<Contact> get copyWith => throw _privateConstructorUsedError;
 }
@@ -70,7 +66,8 @@ abstract class $ContactCopyWith<$Res> {
       String? twitter,
       @JsonKey(name: 'SenderId') String? senderId,
       @JsonKey(name: 'TeamId') String? teamId,
-      @JsonKey(name: 'CampaignId') String? campaignId});
+      @JsonKey(name: 'CampaignId') String? campaignId,
+      Map<String, dynamic> customFields});
 }
 
 /// @nodoc
@@ -104,6 +101,7 @@ class _$ContactCopyWithImpl<$Res, $Val extends Contact>
     Object? senderId = freezed,
     Object? teamId = freezed,
     Object? campaignId = freezed,
+    Object? customFields = null,
   }) {
     return _then(_value.copyWith(
       contactId: freezed == contactId
@@ -178,6 +176,10 @@ class _$ContactCopyWithImpl<$Res, $Val extends Contact>
           ? _value.campaignId
           : campaignId // ignore: cast_nullable_to_non_nullable
               as String?,
+      customFields: null == customFields
+          ? _value.customFields
+          : customFields // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ) as $Val);
   }
 }
@@ -207,7 +209,8 @@ abstract class _$$ContactImplCopyWith<$Res> implements $ContactCopyWith<$Res> {
       String? twitter,
       @JsonKey(name: 'SenderId') String? senderId,
       @JsonKey(name: 'TeamId') String? teamId,
-      @JsonKey(name: 'CampaignId') String? campaignId});
+      @JsonKey(name: 'CampaignId') String? campaignId,
+      Map<String, dynamic> customFields});
 }
 
 /// @nodoc
@@ -239,6 +242,7 @@ class __$$ContactImplCopyWithImpl<$Res>
     Object? senderId = freezed,
     Object? teamId = freezed,
     Object? campaignId = freezed,
+    Object? customFields = null,
   }) {
     return _then(_$ContactImpl(
       contactId: freezed == contactId
@@ -313,13 +317,17 @@ class __$$ContactImplCopyWithImpl<$Res>
           ? _value.campaignId
           : campaignId // ignore: cast_nullable_to_non_nullable
               as String?,
+      customFields: null == customFields
+          ? _value._customFields
+          : customFields // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$ContactImpl implements _Contact {
+
+class _$ContactImpl extends _Contact {
   const _$ContactImpl(
       {this.contactId,
       this.email,
@@ -338,10 +346,10 @@ class _$ContactImpl implements _Contact {
       this.twitter,
       @JsonKey(name: 'SenderId') this.senderId,
       @JsonKey(name: 'TeamId') this.teamId,
-      @JsonKey(name: 'CampaignId') this.campaignId});
-
-  factory _$ContactImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ContactImplFromJson(json);
+      @JsonKey(name: 'CampaignId') this.campaignId,
+      final Map<String, dynamic> customFields = const {}})
+      : _customFields = customFields,
+        super._();
 
   @override
   final String? contactId;
@@ -382,10 +390,18 @@ class _$ContactImpl implements _Contact {
   @override
   @JsonKey(name: 'CampaignId')
   final String? campaignId;
+  final Map<String, dynamic> _customFields;
+  @override
+  @JsonKey()
+  Map<String, dynamic> get customFields {
+    if (_customFields is EqualUnmodifiableMapView) return _customFields;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_customFields);
+  }
 
   @override
   String toString() {
-    return 'Contact(contactId: $contactId, email: $email, firstName: $firstName, lastName: $lastName, phone: $phone, image: $image, replied: $replied, bounced: $bounced, finished: $finished, verified: $verified, deleted: $deleted, companyUrl: $companyUrl, oneLiner: $oneLiner, linkedinUrl: $linkedinUrl, twitter: $twitter, senderId: $senderId, teamId: $teamId, campaignId: $campaignId)';
+    return 'Contact(contactId: $contactId, email: $email, firstName: $firstName, lastName: $lastName, phone: $phone, image: $image, replied: $replied, bounced: $bounced, finished: $finished, verified: $verified, deleted: $deleted, companyUrl: $companyUrl, oneLiner: $oneLiner, linkedinUrl: $linkedinUrl, twitter: $twitter, senderId: $senderId, teamId: $teamId, campaignId: $campaignId, customFields: $customFields)';
   }
 
   @override
@@ -420,47 +436,43 @@ class _$ContactImpl implements _Contact {
                 other.senderId == senderId) &&
             (identical(other.teamId, teamId) || other.teamId == teamId) &&
             (identical(other.campaignId, campaignId) ||
-                other.campaignId == campaignId));
+                other.campaignId == campaignId) &&
+            const DeepCollectionEquality()
+                .equals(other._customFields, _customFields));
   }
 
-  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      contactId,
-      email,
-      firstName,
-      lastName,
-      phone,
-      image,
-      replied,
-      bounced,
-      finished,
-      verified,
-      deleted,
-      companyUrl,
-      oneLiner,
-      linkedinUrl,
-      twitter,
-      senderId,
-      teamId,
-      campaignId);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        contactId,
+        email,
+        firstName,
+        lastName,
+        phone,
+        image,
+        replied,
+        bounced,
+        finished,
+        verified,
+        deleted,
+        companyUrl,
+        oneLiner,
+        linkedinUrl,
+        twitter,
+        senderId,
+        teamId,
+        campaignId,
+        const DeepCollectionEquality().hash(_customFields)
+      ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ContactImplCopyWith<_$ContactImpl> get copyWith =>
       __$$ContactImplCopyWithImpl<_$ContactImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ContactImplToJson(
-      this,
-    );
-  }
 }
 
-abstract class _Contact implements Contact {
+abstract class _Contact extends Contact {
   const factory _Contact(
       {final String? contactId,
       final String? email,
@@ -479,9 +491,9 @@ abstract class _Contact implements Contact {
       final String? twitter,
       @JsonKey(name: 'SenderId') final String? senderId,
       @JsonKey(name: 'TeamId') final String? teamId,
-      @JsonKey(name: 'CampaignId') final String? campaignId}) = _$ContactImpl;
-
-  factory _Contact.fromJson(Map<String, dynamic> json) = _$ContactImpl.fromJson;
+      @JsonKey(name: 'CampaignId') final String? campaignId,
+      final Map<String, dynamic> customFields}) = _$ContactImpl;
+  const _Contact._() : super._();
 
   @override
   String? get contactId;
@@ -522,6 +534,8 @@ abstract class _Contact implements Contact {
   @override
   @JsonKey(name: 'CampaignId')
   String? get campaignId;
+  @override
+  Map<String, dynamic> get customFields;
   @override
   @JsonKey(ignore: true)
   _$$ContactImplCopyWith<_$ContactImpl> get copyWith =>
