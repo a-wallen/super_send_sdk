@@ -55,10 +55,10 @@ abstract class Contact with _$Contact {
     );
 
     return Contact(
-      contactId: json['contactId'] as String?,
+      contactId: json['contact_id'] as String?,
       email: json['email'] as String?,
-      firstName: json['firstName'] as String?,
-      lastName: json['lastName'] as String?,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
       phone: json['phone'] as String?,
       image: json['image'] as String?,
       replied: json['replied'] as bool?,
@@ -66,9 +66,9 @@ abstract class Contact with _$Contact {
       finished: json['finished'] as bool?,
       verified: json['verified'] as bool?,
       deleted: json['deleted'] as bool?,
-      companyUrl: json['companyUrl'] as String?,
-      oneLiner: json['oneLiner'] as String?,
-      linkedinUrl: json['linkedinUrl'] as String?,
+      companyUrl: json['company_url'] as String?,
+      oneLiner: json['one_liner'] as String?,
+      linkedinUrl: json['linkedin_url'] as String?,
       twitter: json['twitter'] as String?,
       senderId: json['SenderId'] as String?,
       teamId: json['TeamId'] as String?,
@@ -79,10 +79,10 @@ abstract class Contact with _$Contact {
 
   Map<String, dynamic> toJson() {
     return {
-      if (contactId != null) 'contactId': contactId,
+      if (contactId != null) 'contact_id': contactId,
       if (email != null) 'email': email,
-      if (firstName != null) 'firstName': firstName,
-      if (lastName != null) 'lastName': lastName,
+      if (firstName != null) 'first_name': firstName,
+      if (lastName != null) 'last_name': lastName,
       if (phone != null) 'phone': phone,
       if (image != null) 'image': image,
       if (replied != null) 'replied': replied,
@@ -90,9 +90,9 @@ abstract class Contact with _$Contact {
       if (finished != null) 'finished': finished,
       if (verified != null) 'verified': verified,
       if (deleted != null) 'deleted': deleted,
-      if (companyUrl != null) 'companyUrl': companyUrl,
+      if (companyUrl != null) 'company_url': companyUrl,
       if (oneLiner != null) 'oneLiner': oneLiner,
-      if (linkedinUrl != null) 'linkedinUrl': linkedinUrl,
+      if (linkedinUrl != null) 'linkedin_url': linkedinUrl,
       if (twitter != null) 'twitter': twitter,
       if (senderId != null) 'SenderId': senderId,
       if (teamId != null) 'TeamId': teamId,
